@@ -1,3 +1,51 @@
-Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+# Research and analyze which of the vulnerabilities appear to be related to the code that was deployed for the environment in this project.
+## Vulnerabilities collected per vector
+Access to Cloud Services
+* MFA should be enabled for the root user
+* (MFA) is enabled for all AWS Identity and Access Management (IAM) users that use a console password.
+* IAM root user access key should not exist
+* Ensure IAM password policy requires minimum password length of 14 or greater
+* No password complexity mechanism or restrictions are configured on instance i-0ca7a5e076c163479 in your assessment target. This allows users to set simple passwords, thereby increasing the chances of unauthorized users gaining access and misusing accounts.
+* Instance i-0ca7a5e076c163479 is configured to allow users to log in with root credentials over SSH, without having to use a command authenticated by a public key. This increases the likelihood of a successful brute-force attack.
+* IAM user credentials unused for 45 days should be removed
+* MFA should be enabled for all IAM users that have a console password
 
-Bonus - provide recommendations on how to remediate the vulnerabilities.
+Access to Cloud Infrastructure
+* VPC default security groups should not allow inbound or outbound traffic
+* Network ACLs should not allow ingress from 0.0.0.0/0 to port 22 or port 3389
+* VPC flow logging should be enabled in all VPCs
+* S3 Block Public Access setting should be enabled
+* S3 general purpose buckets should have MFA delete enabled
+* Instance i-0ca7a5e076c163479 is configured to allow users to log in with root credentials over SSH, without having to use a command authenticated by a public key. This increases the likelihood of a successful brute-force attack.
+
+Defensive Securitry in the Cloud (Monitoring and Alerting)
+* CloudTrail should be enabled and configured with at least one multi-Region trail that includes read and write management events
+
+Protecting Data Stored in the Cloud
+* EBS default encryption should be enabled
+* S3 buckets should require requests to use SSL
+
+
+
+
+
+
+# Bonus - provide recommendations on how to remediate the vulnerabilities.
+## Recommendations for remediation
+
+Access to Cloud Services
+* Setup MFAs
+* Avoid Api keys for IAM users
+* Setup IAM password policy
+
+Access to Cloud Infrastructure
+* Controlling Network Traffic (Ingress and Egress)
+  * Proxy all traffic through a NAT gateway (?)
+  * Configure NACLs to allow only necessary traffic to and from the trusted subnets
+  * Configure security groups to allow only necessary traffic to and from the EC2 instances
+Protecting Data Stored in the Cloud
+* Enable S3 encryption for all S3 buckets
+* Use Object Versioning
+* Block Public Access
+* Use VPC Endpoints to block requests that not coming from the trusted VPC network.
+* Use S3 Bucket Policies to restrict control access

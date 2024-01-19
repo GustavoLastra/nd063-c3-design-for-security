@@ -1,5 +1,12 @@
 
 
 # Identify 2-3 changes that can be made to our environment to prevent an ssh brute force attack from the internet.
+1. Remove key pairs from instances.
+2. Change the default SSH port from 22 to a different port.
+3. limit exposure by allowing access to these ports only to the IP addresses from specific network IP address space
+4. Disable password authentication for SSH access to avoid connection attempts from bots using common passwords.
 
 # Neither instance should have had access to the secret recipes bucket, in the even that instance API credentials were compromised how could we have prevented access to sensitive data.
+1. Remove key pairs from instances.
+2. If not possible Configure Keys so that they are only valid for a short period of time and readable by only the user that created them "chmod 0400"
+3. Encrypt Developers' Laptop's Hardisk in case of theft or loss.

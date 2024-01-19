@@ -2,12 +2,35 @@
 
 ## Scan infrastructure as code templates
 
+* Regula
+
 ### Example vulnerability
+// Terraform
+resource "aws_s3_bucket" "example_bucket" {
+  bucket = "my-example-bucket"
+  acl    = "public-read"  # Vulnerability: S3 bucket is public-read
+}
+
+In some situations when a S3 bucket allows plublic acess it can be a vulnerability
 
 ##Scan AMI’s or containers for OS vulnerabilities
 
+*  Amazon ECR image scanning
+
 ### Example vulnerability
+
+// Dockerfile
+```FROM node:14
+
+# Install packages with known vulnerabilities
+RUN npm install vulnerable-package@1.0.```
+
+ECR image scanning may identify the vulnerable package during the scanning process
 
 ##Scan an AWS environment for cloud configuration vulnerabilities
 
+* AWS Config
 ### Example vulnerability
+An example of a vulnerability that AWS Config can identify is also an S3 bucket that allows public access
+
+

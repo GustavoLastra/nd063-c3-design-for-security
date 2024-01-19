@@ -1,5 +1,18 @@
 Based on the architecture diagram, and the steps you have taken so far to upload data and access the application web service, identify at least 2 obvious poor practices as it relates to security.  Include justification.
 
 # Poor practice 1
+ The web service can be accessed plublicly. This can be avoided by implementing a firewall. to restrict access to the web service. Firewalls can be implemented at a network and resource level with NACLs and Security Groups.
 
 # Poor practice 2
+ The web service can be accessed over HTTP. This allows anyone to intercept the request and response.
+
+# Other poor practices
+* Web service is not protected by any authentication mechanism. Anyone can access the web service and perform any operation.
+* S3 bucket
+    * is not encrypted. This can be done by enabling server side encryption on the bucket.
+    * does not have policies to restrict access to the bucket.
+    * does not have versioning enabled to avoid ransom attacks.
+    * does not have logging enabled.
+    * does not have lifecycle policies to move data to cheaper storage after a certain period of time.
+    * does not have cross region replication enabled.
+    * does not have MFA delete enabled.
